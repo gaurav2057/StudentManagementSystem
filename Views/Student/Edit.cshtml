@@ -1,0 +1,105 @@
+@model StudentManagement.Models.Student
+
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-warning">
+            <h3>Edit Student</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Edit" method="post">
+
+                <input asp-for="StudentId" type="hidden"/>
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger mb-3">
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="Name"></label>
+
+                    <input asp-for="Name"
+                           class="form-control"/>
+
+                    <span asp-validation-for="Name"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="Email"></label>
+
+                    <input asp-for="Email"
+                           class="form-control"/>
+
+                    <span asp-validation-for="Email"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="Age"></label>
+
+                    <input asp-for="Age"
+                           class="form-control"/>
+
+                    <span asp-validation-for="Age"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="Course"></label>
+
+                    <input asp-for="Course"
+                           class="form-control"/>
+
+                    <span asp-validation-for="Course"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="City"></label>
+
+                    <input asp-for="City"
+                           class="form-control"/>
+
+                    <span asp-validation-for="City"
+                          class="text-danger"></span>
+
+                </div>
+
+                <button class="btn btn-warning">
+                    Update Student
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

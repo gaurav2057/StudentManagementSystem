@@ -1,0 +1,83 @@
+﻿@model StudentManagement.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">
+            Student Management System
+        </h1>
+
+        <p class="text-muted">
+            ASP.NET Core MVC + Dapper + SQL Server
+        </p>
+
+        <a asp-controller="Student"
+           asp-action="Index"
+           class="btn btn-primary mt-2">
+            Manage Students
+        </a>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h5>Total Students</h5>
+
+                    <h2 class="fw-bold text-primary">
+                        @Model.TotalStudents
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h5>Total Courses</h5>
+
+                    <h2 class="fw-bold text-success">
+                        @Model.TotalCourses
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h5>Total Cities</h5>
+
+                    <h2 class="fw-bold text-danger">
+                        @Model.TotalCities
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
