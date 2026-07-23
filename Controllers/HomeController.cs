@@ -17,8 +17,19 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         var dashboard = _repository.GetDashboardData();
-
         return View(dashboard);
+    }
+
+    // NEW ACTION
+    public IActionResult About()
+    {
+        return View();
+    }
+
+    // NEW ACTION
+    public IActionResult Contact()
+    {
+        return View();
     }
 
     public IActionResult Privacy()

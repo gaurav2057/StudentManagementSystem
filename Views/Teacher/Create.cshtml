@@ -1,22 +1,20 @@
-@model StudentManagement.Models.Student
+@model StudentManagement.Models.Teacher
 
 @{
-    ViewData["Title"] = "Edit Student";
+    ViewData["Title"] = "Add Teacher";
 }
 
 <div class="container mt-4">
 
     <div class="card shadow">
 
-        <div class="card-header bg-warning">
-            <h3>Edit Student</h3>
+        <div class="card-header bg-success text-white">
+            <h3>Add New Teacher</h3>
         </div>
 
         <div class="card-body">
 
-            <form asp-action="Edit" method="post">
-
-                <input asp-for="StudentId" type="hidden" />
+            <form asp-action="Create" method="post">
 
                 <div asp-validation-summary="ModelOnly"
                      class="text-danger mb-3">
@@ -36,24 +34,37 @@
 
                 <div class="mb-3">
 
-                    <label asp-for="Email" class="form-label"></label>
+                    <label asp-for="Department" class="form-label"></label>
 
-                    <input asp-for="Email"
+                    <input asp-for="Department"
                            class="form-control" />
 
-                    <span asp-validation-for="Email"
+                    <span asp-validation-for="Department"
                           class="text-danger"></span>
 
                 </div>
 
                 <div class="mb-3">
 
-                    <label asp-for="Age" class="form-label"></label>
+                    <label asp-for="Qualification" class="form-label"></label>
 
-                    <input asp-for="Age"
+                    <input asp-for="Qualification"
                            class="form-control" />
 
-                    <span asp-validation-for="Age"
+                    <span asp-validation-for="Qualification"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="Email" class="form-label"></label>
+
+                    <input asp-for="Email"
+                           class="form-control"
+                           placeholder="example@gmail.com" />
+
+                    <span asp-validation-for="Email"
                           class="text-danger"></span>
 
                 </div>
@@ -79,24 +90,12 @@
 
                 </div>
 
-                <div class="mb-3">
-
-                    <label asp-for="City" class="form-label"></label>
-
-                    <input asp-for="City"
-                           class="form-control" />
-
-                    <span asp-validation-for="City"
-                          class="text-danger"></span>
-
-                </div>
-
                 <button type="submit"
-                        class="btn btn-warning">
+                        class="btn btn-success">
 
-                    <i class="bi bi-pencil-square me-2"></i>
+                    <i class="bi bi-check-circle me-2"></i>
 
-                    Update Student
+                    Save Teacher
 
                 </button>
 

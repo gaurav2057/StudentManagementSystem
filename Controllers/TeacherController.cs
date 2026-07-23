@@ -7,35 +7,23 @@ using StudentManagement.Repositories;
 namespace StudentManagement.Controllers;
 
 [Authorize]
-public class StudentController : Controller
+public class TeacherController : Controller
 {
-    private readonly IStudentRepository _repository;
+    private readonly ITeacherRepository _repository;
     private readonly ICourseRepository _courseRepository;
 
-    public StudentController(
-        IStudentRepository repository,
+    public TeacherController(
+        ITeacherRepository repository,
         ICourseRepository courseRepository)
     {
         _repository = repository;
         _courseRepository = courseRepository;
     }
 
-    public IActionResult Index(string? searchTerm)
+    public IActionResult Index()
     {
-        IEnumerable<Student> students;
-
-        if (string.IsNullOrWhiteSpace(searchTerm))
-        {
-            students = _repository.GetAllStudents();
-        }
-        else
-        {
-            students = _repository.SearchStudents(searchTerm);
-        }
-
-        ViewBag.SearchTerm = searchTerm;
-
-        return View(students);
+        var teachers = _repository.GetAllTeachers();
+        return View(teachers);
     }
 
     [HttpGet]
@@ -50,7 +38,7 @@ public class StudentController : Controller
     }
 
     [HttpPost]
-    public IActionResult Create(Student student)
+    public IActionResult Create(Teacher teacher)
     {
         if (!ModelState.IsValid)
         {
@@ -58,12 +46,12 @@ public class StudentController : Controller
                 _courseRepository.GetAllCourses(),
                 "CourseId",
                 "CourseName",
-                student.CourseId);
+                teacher.CourseId);
 
-            return View(student);
+            return View(teacher);
         }
 
-        _repository.AddStudent(student);
+        _repository.AddTeacher(teacher);
 
         return RedirectToAction(nameof(Index));
     }
@@ -71,22 +59,22 @@ public class StudentController : Controller
     [HttpGet]
     public IActionResult Edit(int id)
     {
-        var student = _repository.GetStudentById(id);
+        var teacher = _repository.GetTeacherById(id);
 
-        if (student == null)
+        if (teacher == null)
             return NotFound();
 
         ViewBag.Courses = new SelectList(
             _courseRepository.GetAllCourses(),
             "CourseId",
             "CourseName",
-            student.CourseId);
+            teacher.CourseId);
 
-        return View(student);
+        return View(teacher);
     }
 
     [HttpPost]
-    public IActionResult Edit(Student student)
+    public IActionResult Edit(Teacher teacher)
     {
         if (!ModelState.IsValid)
         {
@@ -94,12 +82,12 @@ public class StudentController : Controller
                 _courseRepository.GetAllCourses(),
                 "CourseId",
                 "CourseName",
-                student.CourseId);
+                teacher.CourseId);
 
-            return View(student);
+            return View(teacher);
         }
 
-        _repository.UpdateStudent(student);
+        _repository.UpdateTeacher(teacher);
 
         return RedirectToAction(nameof(Index));
     }
@@ -108,7 +96,7 @@ public class StudentController : Controller
     [HttpPost]
     public IActionResult Delete(int id)
     {
-        _repository.DeleteStudent(id);
+        _repository.DeleteTeacher(id);
 
         return RedirectToAction(nameof(Index));
     }

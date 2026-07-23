@@ -24,7 +24,8 @@
 
                     <label asp-for="Name" class="form-label"></label>
 
-                    <input asp-for="Name" class="form-control" />
+                    <input asp-for="Name"
+                           class="form-control" />
 
                     <span asp-validation-for="Name"
                           class="text-danger"></span>
@@ -58,12 +59,21 @@
 
                 <div class="mb-3">
 
-                    <label asp-for="Course" class="form-label"></label>
+                    <label asp-for="CourseId" class="form-label">
+                        Course
+                    </label>
 
-                    <input asp-for="Course"
-                           class="form-control" />
+                    <select asp-for="CourseId"
+                            asp-items="ViewBag.Courses"
+                            class="form-select">
 
-                    <span asp-validation-for="Course"
+                        <option value="">
+                            -- Select Course --
+                        </option>
+
+                    </select>
+
+                    <span asp-validation-for="CourseId"
                           class="text-danger"></span>
 
                 </div>
@@ -82,12 +92,20 @@
 
                 <button type="submit"
                         class="btn btn-success">
+
+                    <i class="bi bi-check-circle me-2"></i>
+
                     Save Student
+
                 </button>
 
                 <a asp-action="Index"
                    class="btn btn-secondary">
+
+                    <i class="bi bi-arrow-left me-2"></i>
+
                     Cancel
+
                 </a>
 
             </form>

@@ -16,7 +16,19 @@ public class StudentRepository : IStudentRepository
     public IEnumerable<Student> GetAllStudents()
     {
         using var connection = _context.CreateConnection();
-        return connection.Query<Student>("SELECT * FROM Students");
+
+        return connection.Query<Student>(
+            @"SELECT
+                s.StudentId,
+                s.Name,
+                s.Email,
+                s.Age,
+                s.City,
+                s.CourseId,
+                c.CourseName
+              FROM Students s
+              INNER JOIN Courses c
+              ON s.CourseId = c.CourseId");
     }
 
     public IEnumerable<Student> SearchStudents(string searchTerm)
@@ -24,11 +36,21 @@ public class StudentRepository : IStudentRepository
         using var connection = _context.CreateConnection();
 
         return connection.Query<Student>(
-            @"SELECT * FROM Students
-              WHERE Name LIKE @Search
-                 OR Email LIKE @Search
-                 OR Course LIKE @Search
-                 OR City LIKE @Search",
+            @"SELECT
+                s.StudentId,
+                s.Name,
+                s.Email,
+                s.Age,
+                s.City,
+                s.CourseId,
+                c.CourseName
+              FROM Students s
+              INNER JOIN Courses c
+              ON s.CourseId = c.CourseId
+              WHERE s.Name LIKE @Search
+                 OR s.Email LIKE @Search
+                 OR c.CourseName LIKE @Search
+                 OR s.City LIKE @Search",
             new
             {
                 Search = $"%{searchTerm}%"
@@ -40,7 +62,18 @@ public class StudentRepository : IStudentRepository
         using var connection = _context.CreateConnection();
 
         return connection.QuerySingleOrDefault<Student>(
-            "SELECT * FROM Students WHERE StudentId = @Id",
+            @"SELECT
+                s.StudentId,
+                s.Name,
+                s.Email,
+                s.Age,
+                s.City,
+                s.CourseId,
+                c.CourseName
+              FROM Students s
+              INNER JOIN Courses c
+              ON s.CourseId = c.CourseId
+              WHERE s.StudentId=@Id",
             new { Id = id });
     }
 
@@ -49,8 +82,10 @@ public class StudentRepository : IStudentRepository
         using var connection = _context.CreateConnection();
 
         connection.Execute(
-            @"INSERT INTO Students (Name, Email, Age, Course, City)
-              VALUES (@Name, @Email, @Age, @Course, @City)",
+            @"INSERT INTO Students
+            (Name,Email,Age,City,CourseId)
+            VALUES
+            (@Name,@Email,@Age,@City,@CourseId)",
             student);
     }
 
@@ -60,12 +95,12 @@ public class StudentRepository : IStudentRepository
 
         connection.Execute(
             @"UPDATE Students
-              SET Name = @Name,
-                  Email = @Email,
-                  Age = @Age,
-                  Course = @Course,
-                  City = @City
-              WHERE StudentId = @StudentId",
+              SET Name=@Name,
+                  Email=@Email,
+                  Age=@Age,
+                  City=@City,
+                  CourseId=@CourseId
+              WHERE StudentId=@StudentId",
             student);
     }
 
@@ -74,7 +109,7 @@ public class StudentRepository : IStudentRepository
         using var connection = _context.CreateConnection();
 
         connection.Execute(
-            "DELETE FROM Students WHERE StudentId = @Id",
+            "DELETE FROM Students WHERE StudentId=@Id",
             new { Id = id });
     }
 
@@ -84,14 +119,17 @@ public class StudentRepository : IStudentRepository
 
         return new DashboardViewModel
         {
-            TotalStudents = connection.ExecuteScalar<int>(
-                "SELECT COUNT(*) FROM Students"),
+            TotalStudents =
+                connection.ExecuteScalar<int>(
+                    "SELECT COUNT(*) FROM Students"),
 
-            TotalCourses = connection.ExecuteScalar<int>(
-                "SELECT COUNT(DISTINCT Course) FROM Students"),
+            TotalCourses =
+                connection.ExecuteScalar<int>(
+                    "SELECT COUNT(*) FROM Courses"),
 
-            TotalCities = connection.ExecuteScalar<int>(
-                "SELECT COUNT(DISTINCT City) FROM Students")
+            TotalCities =
+                connection.ExecuteScalar<int>(
+                    "SELECT COUNT(DISTINCT City) FROM Students")
         };
     }
 }

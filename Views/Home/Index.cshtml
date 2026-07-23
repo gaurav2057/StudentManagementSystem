@@ -1,82 +1,273 @@
-﻿@model StudentManagement.Models.DashboardViewModel
-
-@{
-    ViewData["Title"] = "Dashboard";
+﻿@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="container mt-5">
+<!-- Hero Section -->
+<div class="bg-primary text-white rounded-4 shadow-lg p-5 mb-5">
 
-    <div class="text-center mb-5">
-        <h1 class="display-5 fw-bold">
+    <div class="text-center">
+
+        <h1 class="display-3 fw-bold">
             Student Management System
         </h1>
 
-        <p class="text-muted">
-            ASP.NET Core MVC + Dapper + SQL Server
+        <p class="lead mt-3">
+            Manage Students, Teachers and Courses efficiently in one place.
         </p>
+
+    </div>
+
+</div>
+
+<!-- Quick Access -->
+<div class="text-center mb-4">
+
+    <h2 class="fw-bold">Quick Access</h2>
+
+    <p class="text-muted">
+        Select a module to manage your college data.
+    </p>
+
+</div>
+
+<div class="row g-4 mb-5">
+
+    <!-- Students -->
+    <div class="col-md-4">
 
         <a asp-controller="Student"
            asp-action="Index"
-           class="btn btn-primary mt-2">
-            Manage Students
+           class="text-decoration-none text-dark">
+
+            <div class="card h-100 shadow feature-card student-card">
+
+                <div class="card-body text-center p-5">
+
+                    <i class="bi bi-mortarboard-fill display-1 text-primary"></i>
+
+                    <h3 class="mt-4 fw-bold">
+                        Students
+                    </h3>
+
+                    <p class="text-muted">
+                        Add, update, search and manage student records.
+                    </p>
+
+                    <button class="btn btn-primary px-4">
+                        Manage Students
+                    </button>
+
+                </div>
+
+            </div>
+
         </a>
+
     </div>
 
-    <div class="row">
+    <!-- Teachers -->
+    <div class="col-md-4">
 
-        <div class="col-md-4 mb-3">
+        <a asp-controller="Teacher"
+           asp-action="Index"
+           class="text-decoration-none text-dark">
 
-            <div class="card shadow-sm">
+            <div class="card h-100 shadow feature-card teacher-card">
 
-                <div class="card-body text-center">
+                <div class="card-body text-center p-5">
 
-                    <h5>Total Students</h5>
+                    <i class="bi bi-person-workspace display-1 text-success"></i>
 
-                    <h2 class="fw-bold text-primary">
-                        @Model.TotalStudents
-                    </h2>
+                    <h3 class="mt-4 fw-bold">
+                        Teachers
+                    </h3>
 
-                </div>
+                    <p class="text-muted">
+                        Maintain faculty information and department details.
+                    </p>
 
-            </div>
-
-        </div>
-
-        <div class="col-md-4 mb-3">
-
-            <div class="card shadow-sm">
-
-                <div class="card-body text-center">
-
-                    <h5>Total Courses</h5>
-
-                    <h2 class="fw-bold text-success">
-                        @Model.TotalCourses
-                    </h2>
+                    <button class="btn btn-success px-4">
+                        Manage Teachers
+                    </button>
 
                 </div>
 
             </div>
 
-        </div>
+        </a>
 
-        <div class="col-md-4 mb-3">
+    </div>
 
-            <div class="card shadow-sm">
+    <!-- Courses -->
+    <div class="col-md-4">
 
-                <div class="card-body text-center">
+        <a asp-controller="Course"
+           asp-action="Index"
+           class="text-decoration-none text-dark">
 
-                    <h5>Total Cities</h5>
+            <div class="card h-100 shadow feature-card course-card">
 
-                    <h2 class="fw-bold text-danger">
-                        @Model.TotalCities
-                    </h2>
+                <div class="card-body text-center p-5">
+
+                    <i class="bi bi-book-half display-1 text-warning"></i>
+
+                    <h3 class="mt-4 fw-bold">
+                        Courses
+                    </h3>
+
+                    <p class="text-muted">
+                        Create and manage available college courses.
+                    </p>
+
+                    <button class="btn btn-warning px-4">
+                        Manage Courses
+                    </button>
 
                 </div>
 
             </div>
 
+        </a>
+
+    </div>
+
+</div>
+
+<hr class="my-5">
+
+<!-- Statistics -->
+
+<div class="text-center mb-4">
+
+    <h2 class="fw-bold">
+        System Statistics
+    </h2>
+
+    <p class="text-muted">
+        Overview of the management system.
+    </p>
+
+</div>
+
+<div class="row g-4 mb-5">
+
+    <div class="col-md-4">
+
+        <div class="card bg-primary text-white shadow border-0">
+
+            <div class="card-body text-center py-4">
+
+                <i class="bi bi-people-fill display-4"></i>
+
+                <h5 class="mt-3">
+                    Users
+                </h5>
+
+                <h2 class="fw-bold">
+                    3
+                </h2>
+
+            </div>
+
         </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card bg-success text-white shadow border-0">
+
+            <div class="card-body text-center py-4">
+
+                <i class="bi bi-building display-4"></i>
+
+                <h5 class="mt-3">
+                    Cities
+                </h5>
+
+                <h2 class="fw-bold">
+                    5
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card bg-warning shadow border-0">
+
+            <div class="card-body text-center py-4">
+
+                <i class="bi bi-award-fill display-4"></i>
+
+                <h5 class="mt-3">
+                    Graduates
+                </h5>
+
+                <h2 class="fw-bold">
+                    250
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Features -->
+
+<div class="text-center mb-4">
+
+    <h2 class="fw-bold">
+        Why Choose Our System?
+    </h2>
+
+</div>
+
+<div class="row text-center">
+
+    <div class="col-md-3">
+
+        <i class="bi bi-check-circle-fill text-success display-5"></i>
+
+        <h5 class="mt-3">
+            Student Management
+        </h5>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <i class="bi bi-check-circle-fill text-success display-5"></i>
+
+        <h5 class="mt-3">
+            Teacher Management
+        </h5>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <i class="bi bi-check-circle-fill text-success display-5"></i>
+
+        <h5 class="mt-3">
+            Course Management
+        </h5>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <i class="bi bi-shield-lock-fill text-primary display-5"></i>
+
+        <h5 class="mt-3">
+            Secure Authentication
+        </h5>
 
     </div>
 
